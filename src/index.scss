@@ -1,0 +1,59 @@
+@keyframes enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.TellMeAnotherButton {
+	display: block;
+  opacity: 0;
+  margin: 4rem auto;
+	border-radius: 5px;
+	border: 0;
+	padding: 0 .5rem;
+  width: 100%;
+  max-width: 15rem;
+	background-color: #0073a8;
+	color: #fff;
+	font-size: 1.25rem;
+  font-style: italic;
+	line-height: 3;
+  letter-spacing: .05rem;
+	text-align: center;
+	cursor: pointer;
+  pointer-events: none;
+  transition: .5s opacity;
+  will-change: opacity;
+
+  & ~ * {
+    opacity: 1;
+    animation: 1.5s enter cubic-bezier(0.86, 0, 0.07, 1); // easeInOutQuint
+    will-change: opacity;
+  }
+
+  & ~ .TellMeAnotherButton {
+    opacity: 0;
+  }
+
+  &.is-unused {
+    opacity: 1;
+    pointer-events: all;
+
+    & ~ * {
+      display: none;
+      animation: none;
+      opacity: 0;
+    }
+  }
+
+  & ~ a[name="endtellmeanother"] ~ * {
+    display: block;
+    display: initial;
+    animation: none;
+    opacity: 1;
+  }
+
+}

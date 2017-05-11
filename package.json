@@ -1,0 +1,23 @@
+{
+  "name": "interactive-tell-me-another",
+  "version": "1.0.0",
+  "description": "A press-for-more revealing story collection",
+  "license": "MIT",
+  "private": true,
+  "contributors": [
+    "Colin Gourlay <Gourlay.Colin@abc.net.au>"
+  ],
+  "scripts": {
+    "start": "npm install && aunty serve --debug"
+  },
+  "devDependencies": {
+    "@abcnews/aunty": "2.2.x"
+  },
+  "aunty": {
+    "type": "basic-story"
+  },
+  "dependencies": {
+    "raf": "^3.3.2",
+    "util-news-selectors": "git+ssh://git@stash.abc-dev.net.au:7999/news/util-news-selectors.git#2.3.0"
+  }
+}
