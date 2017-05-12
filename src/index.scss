@@ -51,9 +51,7 @@
 
   & ~ a[name="endtellmeanother"] ~ * {
     display: block;
-    display: initial;
     animation: none;
     opacity: 1;
   }
-
 }
