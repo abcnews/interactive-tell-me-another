@@ -28,7 +28,7 @@
   transition: .5s opacity;
   will-change: opacity;
 
-  & ~ * {
+  & ~ :not(.MasterGallery) {
     opacity: 1;
     animation: 1.5s enter cubic-bezier(0.86, 0, 0.07, 1); // easeInOutQuint
     will-change: opacity;
@@ -42,14 +42,14 @@
     opacity: 1;
     pointer-events: all;
 
-    & ~ * {
+    & ~ :not(.MasterGallery) {
       display: none;
       animation: none;
       opacity: 0;
     }
   }
 
-  & ~ a[name="endtellmeanother"] ~ * {
+  & ~ a[name="endtellmeanother"] ~ :not(.MasterGallery) {
     display: block;
     animation: none;
     opacity: 1;
