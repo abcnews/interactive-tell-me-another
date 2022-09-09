@@ -8,16 +8,16 @@
     "Colin Gourlay <Gourlay.Colin@abc.net.au>"
   ],
   "scripts": {
-    "start": "npm install && aunty serve --debug"
+    "start": "aunty serve"
   },
   "devDependencies": {
-    "@abcnews/aunty": "2.2.x"
+    "@abcnews/aunty": "13.0.3"
   },
   "aunty": {
-    "type": "basic-story"
+    "type": "basic"
   },
   "dependencies": {
-    "raf": "^3.3.2",
-    "util-news-selectors": "git+ssh://git@stash.abc-dev.net.au:7999/news/util-news-selectors.git#2.3.0"
+    "@abcnews/env-utils": "^3.0.1",
+    "@abcnews/mount-utils": "^2.0.0"
   }
 }
