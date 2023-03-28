@@ -15,6 +15,13 @@ whenOdysseyLoaded.then(() => {
     return;
   }
 
+  let promptText = DEFAULT_PROMPT_TEXT;
+  const [, ...alternativePromptWords] = getMountValue(endEl).split(':');
+
+  if (alternativePromptWords.length > 0) {
+    promptText = alternativePromptWords.join(' ');
+  }
+
   const endElIndex = childEls.indexOf(endEl);
   const headingEls = childEls
     .filter((el, index) => {
@@ -37,7 +44,7 @@ whenOdysseyLoaded.then(() => {
       buttonEl.classList.add(styles.isUnused);
     }
 
-    buttonEl.textContent = 'Tell me another…';
+    buttonEl.textContent = promptText;
 
     buttonEl.onclick = () => {
       buttonEl.classList.remove(styles.isUnused);
