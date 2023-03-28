@@ -12,10 +12,10 @@ Originally implemented for the publication of a [collection of memories](https:/
 
 ### Options
 
-You can change the text on the prompt (from the default "Tell me another…") by adding `:`-delimeted words to the end of the marker. e.g.:
+You can change the text on the prompt (from the default "Tell me another…") by adding `.`-delimeted words to the end of the marker. e.g.:
 
 ```
-#endtellmeanother:Read:the:next:story
+#endtellmeanother:Read.the.next.story
 ```
 
-…will result in a button with the prompt "Read the next story" (each subsequent `:` will be replaced by a space). Due to the limitations of markers, punctuation cannot be accommodated.
+…will result in a button with the prompt "Read the next story" (each subsequent `.` will be replaced by a space). Due to the limitations of markers, the only punctuation that can be accommodated is `:` and `-`.

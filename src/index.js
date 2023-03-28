@@ -15,13 +15,10 @@ whenOdysseyLoaded.then(() => {
     return;
   }
 
-  let promptText = DEFAULT_PROMPT_TEXT;
-  const [, ...alternativePromptWords] = getMountValue(endEl).split(':');
-
-  if (alternativePromptWords.length > 0) {
-    promptText = alternativePromptWords.join(' ');
-  }
-
+  const customPromptText = getMountValue(endEl)
+    .replace(/^endtellmeanother:?/, '')
+    .replaceAll('.', ' ');
+  const promptText = customPromptText || DEFAULT_PROMPT_TEXT;
   const endElIndex = childEls.indexOf(endEl);
   const headingEls = childEls
     .filter((el, index) => {
