@@ -8,25 +8,62 @@
 }
 
 .prompt {
+  --tma-button-color: var(--nw-colour-text-inverse);
+  --tma-button-background-color: var(--nw-colour-theme-button-primary);
+  --tma-button-color-hover: var(--nw-colour-text-primary);
+  --tma-button-background-color-hover: var(--nw-colour-theme-button-primary-hover);
+  --tma-button-color-active: var(--nw-colour-text-primary);
+  --tma-button-background-color-active: var(--nw-colour-theme-button-primary-active);
+
+  --tma-button-font-size: var(--nw-text-sm, 0.875rem);
+  --tma-button-height: 2.625rem;
+  --tma-button-padding-right: var(--nw-spacing-5);
+
+  --tma-button-ring-width: 2px;
+  --tma-button-ring-offset-width: 2px;
+  --tma-button-focused-ring-colour: var(--nw-colour-border-outline);
+  --tma-button-focused-border: 1px solid transparent;
+  --tma-button-focused-ring: 0 0 0 calc(var(--tma-button-ring-width) + var(--tma-button-ring-offset-width))
+    var(--tma-button-focused-ring-colour);
+  --tma-button-border-colour: transparent;
+
   display: block;
   opacity: 0;
   margin: 4rem auto;
-  border-radius: 5px;
-  border: 0;
-  padding: 0 0.5rem;
+  border-radius: var(--nw-radius-6);
+  border: 1px solid var(--tma-button-border-colour);
+  padding: 0;
   width: 100%;
   max-width: 15rem;
-  background-color: #0073a8;
-  color: #fff !important;
-  font-size: 1.25rem;
-  font-style: italic;
+  background-color: var(--tma-button-background-color);
+  color: var(--tma-button-color);
+  font-size: var(--tma-button-font-size);
+  font-weight: 700;
   line-height: 3;
-  letter-spacing: 0.05rem;
   text-align: center;
   cursor: pointer;
   pointer-events: none;
-  transition: 0.5s opacity;
-  will-change: opacity;
+  transition: opacity 0.5s ease-out, color 0.2s ease-out, border-color 0.2s ease-out, border-radius 0.2s ease-out,
+    background-color 0.2s ease-out, box-shadow 0.2s ease-out, transform 0.2s ease-out, text-decoration 0.2s ease-out;
+  will-change: opacity, border-color, border-radius, background-color, box-shadow;
+}
+
+.prompt:hover {
+  background-color: var(--tma-button-background-color-hover);
+  color: var(--tma-button-color-hover);
+}
+
+.prompt:active {
+  color: var(--tma-button-color-active);
+  background-color: var(--tma-button-background-color-active);
+}
+
+.prompt:focus-visible {
+  --tab-outline-colour: var(--nw-colour-border-outline);
+  border: var(--tma-button-focused-border);
+  box-shadow: var(--tma-button-focused-ring-offset), var(--tma-button-focused-ring);
+  outline: var(--tab-outline-colour, var(--nw-colour-text-link)) var(--tab-outline-style) var(--tab-outline-width);
+  outline-offset: var(--tab-offset);
 }
 
 .prompt ~ :not(:global(.MasterGallery)) {

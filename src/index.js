@@ -50,6 +50,8 @@ Promise.all([whenOdysseyLoaded, proxy('interactive-tell-me-another')]).then(() =
     buttonEl.onclick = () => {
       buttonEl.classList.remove(styles.isUnused);
       history.replaceState(null, null, `#${el.id}`);
+      // This could be swapped out for el.scrollIntoView({ behavior: 'smooth' });
+      // But our custom function puts some easing on it which is slightly nicer.
       scrollToEl(el);
     };
 
