@@ -1,6 +1,16 @@
+// @ts-check
+
 const SCROLL_DURATION = 1000;
 const SCROLL_EL_Y_OFFSET = 64;
 
+/**
+ * An easing function
+ * @param {number} t
+ * @param {number} b
+ * @param {number} _c
+ * @param {number} d
+ * @returns {number}
+ */
 const easeInOutQuint = (t, b, _c, d) => {
   const c = _c - b;
 
@@ -11,7 +21,11 @@ const easeInOutQuint = (t, b, _c, d) => {
   return (c / 2) * ((t -= 2) * t * t * t * t + 2) + b;
 };
 
-export const scrollToEl = (el) => {
+/**
+ *
+ * @param {Element} el
+ */
+export const scrollToEl = el => {
   const begin = window.pageYOffset;
   const diff = el.getBoundingClientRect().top - SCROLL_EL_Y_OFFSET;
   const end = begin + diff;

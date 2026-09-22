@@ -1,13 +1,17 @@
+// @ts-check
+
 import { whenOdysseyLoaded } from '@abcnews/env-utils';
 import { getMountValue, selectMounts } from '@abcnews/mount-utils';
 import styles from './styles.css';
 import { scrollToEl } from './utils';
+import { proxy } from '@abcnews/dev-proxy';
 
 const DEFAULT_PROMPT_TEXT = 'Tell me another…';
 const NON_LETTERS_PATTERN = /[^a-zA-Z]+/g;
 
-whenOdysseyLoaded.then(() => {
+Promise.all([whenOdysseyLoaded, proxy('interactive-tell-me-another')]).then(() => {
   const storyEl = document.querySelector('.Main');
+  if (!storyEl) return;
   const childEls = [...Array.from(storyEl.children)];
   const [endEl] = selectMounts('endtellmeanother');
 
