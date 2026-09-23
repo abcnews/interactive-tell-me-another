@@ -1,25 +1,25 @@
 {
-  "name": "interactive-tell-me-another",
-  "version": "2.3.0",
-  "description": "A press-for-more revealing story collection",
-  "license": "MIT",
-  "private": true,
-  "contributors": [
-    "Colin Gourlay <Gourlay.Colin@abc.net.au>"
-  ],
-  "scripts": {
-    "start": "aunty serve",
-    "dev": "aunty serve"
-  },
-  "devDependencies": {
-    "@abcnews/aunty": "^16.0.2"
-  },
-  "aunty": {
-    "type": "basic"
-  },
-  "dependencies": {
-    "@abcnews/dev-proxy": "^1.3.0",
-    "@abcnews/env-utils": "^6.1.0",
-    "@abcnews/mount-utils": "^3.0.1"
-  }
+	"name": "interactive-tell-me-another",
+	"version": "2.3.1",
+	"description": "A press-for-more revealing story collection",
+	"license": "MIT",
+	"private": true,
+	"contributors": [
+		"Colin Gourlay <Gourlay.Colin@abc.net.au>"
+	],
+	"scripts": {
+		"start": "aunty serve",
+		"dev": "aunty serve"
+	},
+	"devDependencies": {
+		"@abcnews/aunty": "^16.0.2"
+	},
+	"aunty": {
+		"type": "basic"
+	},
+	"dependencies": {
+		"@abcnews/dev-proxy": "^1.3.0",
+		"@abcnews/env-utils": "^6.1.0",
+		"@abcnews/mount-utils": "^3.0.1"
+	}
 }
