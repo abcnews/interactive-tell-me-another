@@ -5,6 +5,7 @@ import { getMountValue, isMount, selectMounts } from '@abcnews/mount-utils';
 import styles from './styles.css';
 import { scrollToEl } from './utils';
 import { proxy } from '@abcnews/dev-proxy';
+import { track } from './analytics';
 
 const DEFAULT_PROMPT_TEXT = 'Tell me another…';
 const NON_LETTERS_PATTERN = /[^a-zA-Z]+/g;
@@ -56,7 +57,7 @@ Promise.all([whenOdysseyLoaded, proxy('interactive-tell-me-another')]).then(() =
   const targetEl = document.getElementById(window.location.hash.slice(1));
   const targetElIndex = targetEl !== null && targetEl.parentElement === storyEl ? childEls.indexOf(targetEl) : -1;
 
-  headingEls.slice(1).forEach(el => {
+  headingEls.slice(1).forEach((el, i) => {
     const buttonText = getSectionButtonText(el) || promptText;
     const buttonEl = document.createElement('button');
 
@@ -74,6 +75,7 @@ Promise.all([whenOdysseyLoaded, proxy('interactive-tell-me-another')]).then(() =
       // This could be swapped out for el.scrollIntoView({ behavior: 'smooth' });
       // But our custom function puts some easing on it which is slightly nicer.
       scrollToEl(el);
+      track('tell-me-another', String(i + 1));
     };
 
     storyEl.insertBefore(buttonEl, el);
