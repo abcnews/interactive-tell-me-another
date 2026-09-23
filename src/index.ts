@@ -1,5 +1,3 @@
-// @ts-check
-
 import { whenOdysseyLoaded } from '@abcnews/env-utils';
 import { getMountValue, isMount, selectMounts } from '@abcnews/mount-utils';
 import styles from './styles.css';
@@ -13,7 +11,7 @@ const NON_LETTERS_PATTERN = /[^a-zA-Z]+/g;
 /**
  * @param {string} mountValue
  */
-const getCustomPromptText = mountValue => {
+const getCustomPromptText = (mountValue: string) => {
   return mountValue.replace(/^(endtellmeanother|buttontext):?/, '').replaceAll('.', ' ');
 };
 
@@ -21,7 +19,7 @@ const getCustomPromptText = mountValue => {
  *
  * @param {Element} el
  */
-const getSectionButtonText = el => {
+const getSectionButtonText = (el: Element) => {
   let next = el.nextElementSibling;
   while (next && !(next instanceof HTMLHeadingElement)) {
     if (isMount(next, 'buttontext')) {
@@ -37,7 +35,7 @@ Promise.all([whenOdysseyLoaded, proxy('interactive-tell-me-another')]).then(() =
   const childEls = [...Array.from(storyEl.children)];
   const [endEl] = selectMounts('endtellmeanother');
 
-  if (endEl === null || endEl.parentElement !== storyEl) {
+  if (!endEl || endEl.parentElement !== storyEl) {
     return;
   }
 
@@ -61,16 +59,16 @@ Promise.all([whenOdysseyLoaded, proxy('interactive-tell-me-another')]).then(() =
     const buttonText = getSectionButtonText(el) || promptText;
     const buttonEl = document.createElement('button');
 
-    buttonEl.className = styles.prompt;
+    buttonEl.className = styles.prompt || '';
 
     if (childEls.indexOf(el) > targetElIndex) {
-      buttonEl.classList.add(styles.isUnused);
+      buttonEl.classList.add(styles.isUnused || '');
     }
 
     buttonEl.textContent = buttonText;
 
     buttonEl.onclick = () => {
-      buttonEl.classList.remove(styles.isUnused);
+      buttonEl.classList.remove(styles.isUnused || '');
       history.replaceState(null, '', `#${el.id}`);
       // This could be swapped out for el.scrollIntoView({ behavior: 'smooth' });
       // But our custom function puts some easing on it which is slightly nicer.

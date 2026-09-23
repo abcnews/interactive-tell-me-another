@@ -1,6 +1,6 @@
 {
   "extends": "@abcnews/aunty/ts/config.json",
-  "include": ["src/**/*", "node_modules/@abcnews/aunty/ts/*"],
+  "include": ["*.d.ts", "src/**/*", "node_modules/@abcnews/aunty/ts/*"],
   "compilerOptions": {
     "noUncheckedIndexedAccess": true
   }

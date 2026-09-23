@@ -11,7 +11,7 @@ const SCROLL_EL_Y_OFFSET = 64;
  * @param {number} d
  * @returns {number}
  */
-const easeInOutQuint = (t, b, _c, d) => {
+const easeInOutQuint = (t: number, b: number, _c: number, d: number): number => {
   const c = _c - b;
 
   if ((t /= d / 2) < 1) {
@@ -25,7 +25,7 @@ const easeInOutQuint = (t, b, _c, d) => {
  *
  * @param {Element} el
  */
-export const scrollToEl = el => {
+export const scrollToEl = (el: Element) => {
   const begin = window.pageYOffset;
   const diff = el.getBoundingClientRect().top - SCROLL_EL_Y_OFFSET;
   const end = begin + diff;
