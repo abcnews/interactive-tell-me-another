@@ -1,13 +1,34 @@
 // @ts-check
 
 import { whenOdysseyLoaded } from '@abcnews/env-utils';
-import { getMountValue, selectMounts } from '@abcnews/mount-utils';
+import { getMountValue, isMount, selectMounts } from '@abcnews/mount-utils';
 import styles from './styles.css';
 import { scrollToEl } from './utils';
 import { proxy } from '@abcnews/dev-proxy';
 
 const DEFAULT_PROMPT_TEXT = 'Tell me another…';
 const NON_LETTERS_PATTERN = /[^a-zA-Z]+/g;
+
+/**
+ * @param {string} mountValue
+ */
+const getCustomPromptText = mountValue => {
+  return mountValue.replace(/^(endtellmeanother|buttontext):?/, '').replaceAll('.', ' ');
+};
+
+/**
+ *
+ * @param {Element} el
+ */
+const getSectionButtonText = el => {
+  let next = el.nextElementSibling;
+  while (next && !(next instanceof HTMLHeadingElement)) {
+    if (isMount(next, 'buttontext')) {
+      return getCustomPromptText(getMountValue(next));
+    }
+    next = next.nextElementSibling;
+  }
+};
 
 Promise.all([whenOdysseyLoaded, proxy('interactive-tell-me-another')]).then(() => {
   const storyEl = document.querySelector('.Main');
@@ -19,9 +40,8 @@ Promise.all([whenOdysseyLoaded, proxy('interactive-tell-me-another')]).then(() =
     return;
   }
 
-  const customPromptText = getMountValue(endEl)
-    .replace(/^endtellmeanother:?/, '')
-    .replaceAll('.', ' ');
+  const customPromptText = getCustomPromptText(getMountValue(endEl));
+
   const promptText = customPromptText || DEFAULT_PROMPT_TEXT;
   const endElIndex = childEls.indexOf(endEl);
   const headingEls = childEls
@@ -37,6 +57,7 @@ Promise.all([whenOdysseyLoaded, proxy('interactive-tell-me-another')]).then(() =
   const targetElIndex = targetEl !== null && targetEl.parentElement === storyEl ? childEls.indexOf(targetEl) : -1;
 
   headingEls.slice(1).forEach(el => {
+    const buttonText = getSectionButtonText(el) || promptText;
     const buttonEl = document.createElement('button');
 
     buttonEl.className = styles.prompt;
@@ -45,11 +66,11 @@ Promise.all([whenOdysseyLoaded, proxy('interactive-tell-me-another')]).then(() =
       buttonEl.classList.add(styles.isUnused);
     }
 
-    buttonEl.textContent = promptText;
+    buttonEl.textContent = buttonText;
 
     buttonEl.onclick = () => {
       buttonEl.classList.remove(styles.isUnused);
-      history.replaceState(null, null, `#${el.id}`);
+      history.replaceState(null, '', `#${el.id}`);
       // This could be swapped out for el.scrollIntoView({ behavior: 'smooth' });
       // But our custom function puts some easing on it which is slightly nicer.
       scrollToEl(el);
